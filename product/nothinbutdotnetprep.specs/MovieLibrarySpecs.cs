@@ -5,6 +5,7 @@ using Machine.Specifications;
 using Machine.Specifications.DevelopWithPassion.Extensions;
 using Machine.Specifications.DevelopWithPassion.Rhino;
 using nothinbutdotnetprep.collections;
+using nothinbutdotnetprep.infrastructure.searching;
 using nothinbutdotnetprep.tests.utility;
 
 /* The following set of Contexts (TestFixture) are in place to specify the functionality that you need to complete for the MovieLibrary class.
