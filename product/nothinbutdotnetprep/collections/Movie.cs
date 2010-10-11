@@ -2,7 +2,7 @@ using System;
 
 namespace nothinbutdotnetprep.collections
 {
-    public class Movie : IComparable
+    public class Movie 
     {
         public string title { get; set; }
         public ProductionStudio production_studio { get; set; }
@@ -11,10 +11,7 @@ namespace nothinbutdotnetprep.collections
         public DateTime date_published { get; set; }
 
 
-        public int CompareTo(object obj)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public static int SortByTitle(Movie movie1, Movie movie2)
         {
