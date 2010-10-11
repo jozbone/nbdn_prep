@@ -2,16 +2,13 @@ using System;
 
 namespace nothinbutdotnetprep.collections
 {
-    public class Movie 
+    public class Movie  : IEquatable<Movie>
     {
         public string title { get; set; }
         public ProductionStudio production_studio { get; set; }
         public Genre genre { get; set; }
         public int rating { get; set; }
         public DateTime date_published { get; set; }
-
-
-        
 
         public static int SortByTitle(Movie movie1, Movie movie2)
         {
@@ -27,6 +24,28 @@ namespace nothinbutdotnetprep.collections
         {
             return movie1.date_published.CompareTo(movie2.date_published);
             //var publisher = movie1.production_studio.CompareTo(movie2.production_studio);
+        }
+
+        public bool Equals(Movie other)
+        {
+            if (other == null) return false;
+
+            return ReferenceEquals(this,other) || is_equal_to_non_null_instance_of(other);
+        }
+
+        bool is_equal_to_non_null_instance_of(Movie other)
+        {
+            return this.title == other.title;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Movie);
+        }
+
+        public override int GetHashCode()
+        {
+            return title.GetHashCode();
         }
     }
 }
