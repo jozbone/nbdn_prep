@@ -32,32 +32,31 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_movies_published_by_pixar()
         {
-            return all_movies_matching(is_published_by_pixar);
+            //1.0 style
+            //MovieFilterCondition condition = new MovieFilterCondition(is_published_by_pixar);
+            //2.0 style
+            //MovieFilterCondition condition = is_published_by_pixar;
+//            MovieFilterCondition condition = delegate(Movie movie) {
+//                                                                       return false;
+//            };
+            //3.0 style
+            //MovieFilterCondition condition = (Movie movie) => false;
+//            MovieCriteria condition = movie => movie.production_studio == ProductionStudio.Pixar;
+
+            return all_movies_matching(movie => movie.production_studio == ProductionStudio.Pixar);
         }
 
-        public MovieFilterCondition create()
-        {
-            var item = "blah";
-            return delegate(Movie movie)
-            {
-                Console.Out.WriteLine(item);
-                return false;
-            };
-        }
 
         bool is_published_by_pixar(Movie movie)
         {
             return movie.production_studio == ProductionStudio.Pixar;
         }
 
-        public delegate bool MovieFilterCondition(Movie movie);
+        public delegate bool MovieCriteria(Movie movie);
 
-        IEnumerable<Movie> all_movies_matching(MovieFilterCondition movie_filter_condition)
+        public IEnumerable<Movie> all_movies_matching(MovieCriteria movie_criteria)
         {
-            foreach (var movie in movies)
-            {
-                if (movie_filter_condition(movie)) yield return movie;
-            }
+            return movies.all_items_matching();
         }
 
         public IEnumerable<Movie> all_movies_published_by_pixar_or_disney()
