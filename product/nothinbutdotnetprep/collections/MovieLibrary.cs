@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using nothinbutdotnetprep.infrastructure;
+using nothinbutdotnetprep.infrastructure.searching;
 
 namespace nothinbutdotnetprep.collections
 {
@@ -30,7 +31,7 @@ namespace nothinbutdotnetprep.collections
             return movies.Contains(movie);
         }
 
-        public IEnumerable<Movie> all_movies_matching(Predicate<Movie> movie_criteria)
+        public IEnumerable<Movie> all_movies_matching(Criteria<Movie> movie_criteria)
         {
             return movies.all_items_matching(movie_criteria);
         }

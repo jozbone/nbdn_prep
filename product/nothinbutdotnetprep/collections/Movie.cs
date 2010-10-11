@@ -1,4 +1,5 @@
 using System;
+using nothinbutdotnetprep.infrastructure.searching;
 
 namespace nothinbutdotnetprep.collections
 {
@@ -49,34 +50,34 @@ namespace nothinbutdotnetprep.collections
             return title.GetHashCode();
         }
 
-        public static Predicate<Movie> is_in_genre(Genre genre)
+        public static Criteria<Movie> is_in_genre(Genre genre)
         {
-            return movie => movie.genre == genre; 
+            return new IsInGenre(genre);
         }
 
-        public static Predicate<Movie> is_published_by(ProductionStudio studio)
+        public static Criteria<Movie> is_published_by(ProductionStudio studio)
         {
-            return movie => movie.production_studio == studio;
+            return new IsPublishedBy(studio);
         }
 
-        public static Predicate<Movie> is_published_between(int starting_year, int ending_year)
+        public static Criteria<Movie> is_published_between(int starting_year, int ending_year)
         {
-            return movie => movie.date_published.Year >= starting_year && movie.date_published.Year <= ending_year;
+            return new AnonymousCriteria<Movie>(movie => movie.date_published.Year >= starting_year && movie.date_published.Year <= ending_year);
         }
 
-        public static Predicate<Movie> is_published_after(int year)
+        public static Criteria<Movie> is_published_after(int year)
         {
-            return movie => movie.date_published.Year > year;
+            return new AnonymousCriteria<Movie>(movie => movie.date_published.Year > year);
         }
 
-        public static bool is_not_published_by_pixar(Movie movie)
+        public static Criteria<Movie> is_not_published_by_pixar()
         {
-            return movie.production_studio != ProductionStudio.Pixar;
+            return new IsPublishedBy(ProductionStudio.Pixar).not();
         }
 
-        public static bool is_published_by_pixar_or_disney(Movie movie)
+        public static Criteria<Movie>  is_published_by_pixar_or_disney()
         {
-            return movie.production_studio == ProductionStudio.Pixar || movie.production_studio == ProductionStudio.Disney;
+            return new IsPublishedBy(ProductionStudio.Pixar).or(new IsPublishedBy(ProductionStudio.Disney));
         }
     }
 }

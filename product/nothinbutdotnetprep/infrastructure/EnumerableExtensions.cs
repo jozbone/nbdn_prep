@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using nothinbutdotnetprep.infrastructure.searching;
 
 namespace nothinbutdotnetprep.infrastructure
 {
@@ -10,12 +11,17 @@ namespace nothinbutdotnetprep.infrastructure
             foreach (var item in items) yield return item;
         }
 
-        public static IEnumerable<T> all_items_matching<T>(this IEnumerable<T> items, Predicate<T> condition)
+        static IEnumerable<T> all_items_matching<T>(this IEnumerable<T> items, Predicate<T> condition)
         {
             foreach (var item in items)
             {
                 if (condition(item)) yield return item;
             }
+        }
+
+        public static IEnumerable<T> all_items_matching<T>(this IEnumerable<T> items, Criteria<T> condition)
+        {
+            return all_items_matching(items, condition.is_satisfied_by);
         }
     }
 }
