@@ -214,7 +214,7 @@ namespace nothinbutdotnetprep.specs
         };
 
 
-        static MovieLibrary.MovieFilterCondition result;
+        static MovieLibrary.MovieCriteria result;
     }
 
     [Subject(typeof(MovieLibrary))]

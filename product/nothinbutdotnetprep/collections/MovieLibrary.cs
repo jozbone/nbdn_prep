@@ -56,7 +56,7 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_movies_matching(MovieCriteria movie_criteria)
         {
-            return movies.all_items_matching();
+            return movies.all_items_matching(movie_criteria.Invoke);
         }
 
         public IEnumerable<Movie> all_movies_published_by_pixar_or_disney()
@@ -159,6 +159,11 @@ namespace nothinbutdotnetprep.collections
 
             foreach (var movie in movies)
                 yield return movie;
+        }
+
+        public MovieCriteria create()
+        {
+            throw new NotImplementedException();
         }
     }
 }
