@@ -192,32 +192,6 @@ namespace nothinbutdotnetprep.specs
     }
 
     [Subject(typeof(MovieLibrary))]
-    public class when_using_a_anonymous_method : movie_library_concern
-    {
-        static Movie another_copy_of_speed_racer;
-        static Movie speed_racer;
-
-        Establish c = () =>
-        {
-            speed_racer = new Movie {title = "Speed Racer"};
-            another_copy_of_speed_racer = new Movie {title = "Speed Racer"};
-            movie_collection.Add(speed_racer);
-        };
-
-        Because b = () =>
-            result = sut.create();
-
-
-        It should_be_able_to_access_locally_scoped_data_after_the_fact = () =>
-        {
-            result(new Movie());
-        };
-
-
-        static MovieLibrary.MovieCriteria result;
-    }
-
-    [Subject(typeof(MovieLibrary))]
     public class when_searching_for_movies : concern_for_searching_and_sorting
     {
         /* Look at the potential method explosion that can start to occur as you start to search on different criteria
@@ -227,49 +201,50 @@ namespace nothinbutdotnetprep.specs
 
         It should_be_able_to_find_all_movies_published_by_pixar = () =>
         {
-            var results = sut.all_movies_published_by_pixar();
+            var results = sut.all_movies_matching(Movie.is_published_by(ProductionStudio.Pixar));
 
             results.ShouldContainOnly(cars, a_bugs_life);
         };
 
         It should_be_able_to_find_all_movies_published_by_pixar_or_disney = () =>
         {
-            var results = sut.all_movies_published_by_pixar_or_disney();
+            var results = sut.all_movies_matching(Movie.is_published_by_pixar_or_disney);
 
             results.ShouldContainOnly(a_bugs_life, pirates_of_the_carribean, cars);
         };
 
         It should_be_able_to_find_all_movies_not_published_by_pixar = () =>
         {
-            var results = sut.all_movies_not_published_by_pixar();
+            var results = sut.all_movies_matching(Movie.is_not_published_by_pixar);
 
             results.ShouldNotContain(cars, a_bugs_life);
         };
 
         It should_be_able_to_find_all_movies_published_after_a_certain_year = () =>
         {
-            var results = sut.all_movies_published_after(2004);
+            var results = sut.all_movies_matching(Movie.is_published_after(2004));
+
 
             results.ShouldContainOnly(the_ring, shrek, theres_something_about_mary);
         };
 
         It should_be_able_to_find_all_movies_published_between_a_certain_range_of_years = () =>
         {
-            var results = sut.all_movies_published_between_years(1982, 2003);
+            var results = sut.all_movies_matching(Movie.is_published_between(1982, 2003));
 
             results.ShouldContainOnly(indiana_jones_and_the_temple_of_doom, a_bugs_life, pirates_of_the_carribean);
         };
 
         It should_be_able_to_find_all_kid_movies = () =>
         {
-            var results = sut.all_kid_movies();
+            var results = sut.all_movies_matching(Movie.is_in_genre(Genre.kids));
 
             results.ShouldContainOnly(a_bugs_life, shrek, cars);
         };
 
         It should_be_able_to_find_all_action_movies = () =>
         {
-            var results = sut.all_action_movies();
+            var results = sut.all_movies_matching(Movie.is_in_genre(Genre.action));
 
             results.ShouldContainOnly(indiana_jones_and_the_temple_of_doom, pirates_of_the_carribean);
         };

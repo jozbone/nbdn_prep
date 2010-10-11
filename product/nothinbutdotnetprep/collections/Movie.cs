@@ -9,6 +9,7 @@ namespace nothinbutdotnetprep.collections
         public Genre genre { get; set; }
         public int rating { get; set; }
         public DateTime date_published { get; set; }
+        int new_info { get; set; }
 
         public static int SortByTitle(Movie movie1, Movie movie2)
         {
@@ -46,6 +47,36 @@ namespace nothinbutdotnetprep.collections
         public override int GetHashCode()
         {
             return title.GetHashCode();
+        }
+
+        public static Predicate<Movie> is_in_genre(Genre genre)
+        {
+            return movie => movie.genre == genre; 
+        }
+
+        public static Predicate<Movie> is_published_by(ProductionStudio studio)
+        {
+            return movie => movie.production_studio == studio;
+        }
+
+        public static Predicate<Movie> is_published_between(int starting_year, int ending_year)
+        {
+            return movie => movie.date_published.Year >= starting_year && movie.date_published.Year <= ending_year;
+        }
+
+        public static Predicate<Movie> is_published_after(int year)
+        {
+            return movie => movie.date_published.Year > year;
+        }
+
+        public static bool is_not_published_by_pixar(Movie movie)
+        {
+            return movie.production_studio != ProductionStudio.Pixar;
+        }
+
+        public static bool is_published_by_pixar_or_disney(Movie movie)
+        {
+            return movie.production_studio == ProductionStudio.Pixar || movie.production_studio == ProductionStudio.Disney;
         }
     }
 }
