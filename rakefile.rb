@@ -1,11 +1,8 @@
 require 'rake'
 require 'rake/clean'
 require 'fileutils'
-require 'project.rb'
-require 'local_properties.rb'
-require 'build_utilities.rb'
 
-['build/tools/Rake'].each do|pattern|
+['build/tools/Rake','build'].each do|pattern|
   Dir.glob(File.join(File.dirname(__FILE__),pattern,"*.rb")).each do|item|
     puts item
     require item
