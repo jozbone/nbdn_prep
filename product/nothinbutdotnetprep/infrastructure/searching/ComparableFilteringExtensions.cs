@@ -2,7 +2,7 @@ using System;
 
 namespace nothinbutdotnetprep.infrastructure.searching
 {
-    public static class ComparableFilteringExtensions
+    public static class FilteringExtensions
     {
         public static Criteria<ItemToFilter> between<ItemToFilter, PropertyType>(
             this FilteringExtensionPoint<ItemToFilter, PropertyType> extension_point, PropertyType start,
