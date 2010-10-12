@@ -1,5 +1,4 @@
 using System;
-using nothinbutdotnetprep.infrastructure.searching;
 
 namespace nothinbutdotnetprep.collections
 {
@@ -56,16 +55,6 @@ namespace nothinbutdotnetprep.collections
         public override int GetHashCode()
         {
             return title.GetHashCode();
-        }
-
-        public static Criteria<Movie> is_published_between(int starting_year, int ending_year)
-        {
-            return new AnonymousCriteria<Movie>(movie => movie.date_published.Year >= starting_year && movie.date_published.Year <= ending_year);
-        }
-
-        public static Criteria<Movie> is_published_after(int year)
-        {
-            return new AnonymousCriteria<Movie>(movie => movie.date_published.Year > year);
         }
     }
 }

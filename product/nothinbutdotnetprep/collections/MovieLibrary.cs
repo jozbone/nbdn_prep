@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using nothinbutdotnetprep.infrastructure;
-using nothinbutdotnetprep.infrastructure.searching;
 
 namespace nothinbutdotnetprep.collections
 {
@@ -29,11 +28,6 @@ namespace nothinbutdotnetprep.collections
         bool already_contains(Movie movie)
         {
             return movies.Contains(movie);
-        }
-
-        public IEnumerable<Movie> all_movies_matching(Criteria<Movie> movie_criteria)
-        {
-            return movies.all_items_matching(movie_criteria);
         }
 
         public IEnumerable<Movie> sort_all_movies_by_title_ascending
