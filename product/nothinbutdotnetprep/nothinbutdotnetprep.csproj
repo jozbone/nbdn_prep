@@ -73,6 +73,7 @@
     <Compile Include="infrastructure\sorting\ComparablePropertyComparer.cs" />
     <Compile Include="infrastructure\sorting\Order.cs" />
     <Compile Include="infrastructure\sorting\ReverseComparer.cs" />
+    <Compile Include="infrastructure\sorting\SortingExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

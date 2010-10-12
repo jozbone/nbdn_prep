@@ -312,13 +312,7 @@ namespace nothinbutdotnetprep.specs
             //Universal
             //Disney
 
-            var comparer = Order<Movie>.by(x => x.production_studio,
-                                           ProductionStudio.MGM,
-                                           ProductionStudio.Pixar,
-                                           ProductionStudio.Dreamworks,
-                                           ProductionStudio.Universal,
-                                           ProductionStudio.Disney,
-                                           ProductionStudio.Paramount)
+            var comparer = Order<Movie>.by(x => x.rating)
                                         .then_by(x => x.date_published);
 
             var results = sut.all_movies().sort_using(comparer);

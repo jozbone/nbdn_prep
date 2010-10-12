@@ -27,12 +27,12 @@ namespace nothinbutdotnetprep.collections
         {
             return new SortByMovieStudioAndYearPublished();
         }
+        
         public int something
         {
             get
             {
-                
-            return 0;
+                return 0;
             }
         }
 
