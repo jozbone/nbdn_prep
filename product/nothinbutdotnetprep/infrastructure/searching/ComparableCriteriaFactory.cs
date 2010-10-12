@@ -15,5 +15,10 @@ namespace nothinbutdotnetprep.infrastructure.searching
         {
             return new AnonymousCriteria<ItemToFilter>(item => property_accessor(item).CompareTo(value) > 0);
         }
+
+        public Criteria<ItemToFilter> between(PropertyType value1, PropertyType value2)
+        {
+            return new AnonymousCriteria<ItemToFilter>(item => property_accessor(item).CompareTo(value1) >= 0 && property_accessor(item).CompareTo(value2) <= 0);
+        }
     }
 }
