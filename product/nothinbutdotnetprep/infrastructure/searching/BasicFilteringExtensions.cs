@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace nothinbutdotnetprep.infrastructure.searching
+﻿namespace nothinbutdotnetprep.infrastructure.searching
 {
     public static class BasicFilteringExtensions
     {
@@ -13,9 +11,8 @@ namespace nothinbutdotnetprep.infrastructure.searching
         public static Criteria<ItemToFilter> equal_to_any<ItemToFilter, PropertyType>(
             this FilteringExtensionPoint<ItemToFilter, PropertyType> extension_point, params PropertyType[] values)
         {
-            return
-                new AnonymousCriteria<ItemToFilter>(
-                    x => new List<PropertyType>(values).Contains(extension_point.accessor(x)));
+            return new PropertyCriteria<ItemToFilter, PropertyType>(extension_point.accessor,
+                                                                    new IsEqualToAny<PropertyType>(values));
         }
 
         public static Criteria<ItemToFilter> not_equal_to<ItemToFilter, PropertyType>(
