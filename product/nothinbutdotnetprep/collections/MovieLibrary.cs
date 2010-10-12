@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using nothinbutdotnetprep.infrastructure;
-using nothinbutdotnetprep.infrastructure.sorting;
 
 namespace nothinbutdotnetprep.collections
 {
@@ -29,31 +27,6 @@ namespace nothinbutdotnetprep.collections
         bool already_contains(Movie movie)
         {
             return movies.Contains(movie);
-        }
-
-        public IEnumerable<Movie> sort_all_movies_by_title_ascending
-        {
-            get { return movies.sort_using(Movie.SortByTitle()); }
-        }
-
-        public IEnumerable<Movie> sort_all_movies_by_movie_studio_and_year_published()
-        {
-            return movies.sort_using(Movie.SortByStudioAndYearPublished());
-        }
-
-        public IEnumerable<Movie> sort_all_movies_by_date_published_descending()
-        {
-            return movies.sort_using(new ReverseComparer<Movie>(new SortByDate()));
-        }
-
-        public IEnumerable<Movie> sort_all_movies_by_title_descending
-        {
-            get { return movies.sort_using(new ReverseComparer<Movie>(Movie.SortByTitle())); }
-        }
-
-        public IEnumerable<Movie> sort_all_movies_by_date_published_ascending()
-        {
-            return movies.sort_using(Movie.SortByDate());
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace nothinbutdotnetprep.infrastructure.sorting
@@ -12,36 +11,31 @@ namespace nothinbutdotnetprep.infrastructure.sorting
             return new ReverseComparer<ItemToOrder>(by(property_accessor));
         }
 
-        public static IComparer<ItemToOrder> by<PropertyType>(Func<ItemToOrder, PropertyType> property_accessor) where PropertyType : IComparable<PropertyType>
+        public static IComparer<ItemToOrder> by<PropertyType>(Func<ItemToOrder, PropertyType> property_accessor,params PropertyType[] rankings)
         {
-            return new ComparablePropertyComparer<ItemToOrder, PropertyType>(property_accessor);
+            return new PropertyComparer<ItemToOrder, PropertyType>(property_accessor,
+                                                                   new RakingComparer<PropertyType>(rankings));
         }
 
-        public static IComparer<ItemToOrder> then_by<PropertyType>(Func<ItemToOrder, PropertyType> property_accessor) where PropertyType : IComparable<PropertyType>
+        public static IComparer<ItemToOrder> by<PropertyType>(Func<ItemToOrder, PropertyType> property_accessor)
+            where PropertyType : IComparable<PropertyType>
         {
-            return new ComparablePropertyComparer<ItemToOrder, PropertyType>(property_accessor);
+            return new PropertyComparer<ItemToOrder, PropertyType>(property_accessor,
+                                                                   new ComparableComparer<PropertyType>());
         }
 
-       
     }
-    public class BasicOrderingFactory<ItemToOrder, PropertyType> : OrderingFactory<ItemToOrder, PropertyType> where PropertyType : IComparable<PropertyType>
+
+    public static class ComparerExtensions
     {
-        private Func<ItemToOrder, PropertyType> accessor;
-          public BasicOrderingFactory(Func<ItemToOrder, PropertyType> property_accessor)
-          {
-              accessor = property_accessor;
-          }
-
-        public Comparer<ItemToOrder> create_order_for(Comparer<PropertyType> comparer)
+        public static IComparer<ItemToOrder> then_by<ItemToOrder,PropertyType>(this IComparer<ItemToOrder> first,Func<ItemToOrder,PropertyType> accessor) where PropertyType : IComparable<PropertyType>
         {
-            return new ComparablePropertyComparer<ItemToOrder, PropertyType>(accessor);
+            return new ChainedComparer<ItemToOrder>(first,  Order<ItemToOrder>.by(accessor)); 
+        }
+
+        public static IComparer<ItemToOrder> then_by_descending<ItemToOrder,PropertyType>(this IComparer<ItemToOrder> first,Func<ItemToOrder,PropertyType> accessor) where PropertyType : IComparable<PropertyType>
+        {
+            return new ChainedComparer<ItemToOrder>(first,  Order<ItemToOrder>.by_descending(accessor)); 
         }
     }
-
-    public interface OrderingFactory<ItemToFilter, PropertyType>
-    {
-        Comparer<ItemToFilter> create_order_for(Comparer<PropertyType> comparer);
-    }
-    
-
 }
