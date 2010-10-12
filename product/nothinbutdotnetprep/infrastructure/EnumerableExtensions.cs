@@ -31,12 +31,23 @@ namespace nothinbutdotnetprep.infrastructure
             return all_items_matching(items, condition.is_satisfied_by);
         }
 
-        public static IEnumerable<ItemToSort> order_by_descending<ItemToSort,PropertyType>(this IEnumerable<ItemToSort> items, Func<ItemToSort,PropertyType> accessor)
+        public static IEnumerable<ItemToSort> order_by_descending<ItemToSort, PropertyType>(
+            this IEnumerable<ItemToSort> items, Func<ItemToSort, PropertyType> accessor)
+            where PropertyType : IComparer<PropertyType>
         {
             throw new NotImplementedException();
         }
 
-        public static IEnumerable<ItemToSort> order_by<ItemToSort,PropertyType>(this IEnumerable<ItemToSort> items, Func<ItemToSort,PropertyType> accessor)
+        public static IEnumerable<ItemToSort> order_by<ItemToSort, PropertyType>(this IEnumerable<ItemToSort> items,
+                                                                                 Func<ItemToSort, PropertyType> accessor)
+            where PropertyType : IComparer<PropertyType>
+        {
+            throw new NotImplementedException();
+        }
+
+        public static IEnumerable<ItemToSort> order_by<ItemToSort, PropertyType>(this IEnumerable<ItemToSort> items,
+                                                                                 Func<ItemToSort, PropertyType> accessor,
+                                                                                 params PropertyType[] values)
         {
             throw new NotImplementedException();
         }
