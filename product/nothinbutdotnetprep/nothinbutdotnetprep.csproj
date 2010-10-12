@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{286C7067-D921-4B26-8CFA-9F9B795FD4E1}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -53,9 +53,9 @@
     <Compile Include="infrastructure\searching\AnonymousCriteria.cs" />
     <Compile Include="infrastructure\searching\Criteria.cs" />
     <Compile Include="infrastructure\searching\CriteriaExtensions.cs" />
+    <Compile Include="infrastructure\searching\CriteriaFactory.cs" />
     <Compile Include="infrastructure\searching\NotCriteria.cs" />
     <Compile Include="infrastructure\searching\OrCriteria.cs" />
-    <Compile Include="infrastructure\searching\RandomExtensions.cs" />
     <Compile Include="infrastructure\searching\Where.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
