@@ -221,6 +221,8 @@ namespace nothinbutdotnetprep.specs
             //var results = sut.all_movies().all_items_matching(Where<Movie>.has_a(x => x.production_studio).not.equal_to(ProductionStudio.Pixar));
 
             var results = sut.all_movies().all_items_matching(Where<Movie>.has_a(x => x.production_studio).not_equal_to(ProductionStudio.Pixar));
+
+            //TODO - Can revisit later on in the week
 //            var results = sut.all_movies().all_items_matching(x => x.production_studio).not_equal_to(ProductionStudio.Pixar)));
 
             results.ShouldNotContain(cars, a_bugs_life);
