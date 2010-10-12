@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace nothinbutdotnetprep.collections
 {
@@ -11,20 +12,20 @@ namespace nothinbutdotnetprep.collections
         public DateTime date_published { get; set; }
         int new_info { get; set; }
 
-        public static int SortByTitle(Movie movie1, Movie movie2)
+
+        public static IComparer<Movie> SortByTitle()
         {
-            return movie1.title.CompareTo(movie2.title);
+            return new SortByTitle();
         }
 
-        public static int SortByDate(Movie movie1, Movie movie2)
+        public static IComparer<Movie> SortByDate()
         {
-            return movie1.date_published.CompareTo(movie2.date_published);
+            return new SortByDate();
         }
 
-        public static int SortByStudioAndYearPublished(Movie movie1, Movie movie2)
+        public static IComparer<Movie> SortByStudioAndYearPublished()
         {
-            return movie1.date_published.CompareTo(movie2.date_published);
-            //var publisher = movie1.production_studio.CompareTo(movie2.production_studio);
+            return new SortByMovieStudioAndYearPublished();
         }
         public int something
         {

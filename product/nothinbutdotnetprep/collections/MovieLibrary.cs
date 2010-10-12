@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using nothinbutdotnetprep.infrastructure;
+using nothinbutdotnetprep.infrastructure.sorting;
 
 namespace nothinbutdotnetprep.collections
 {
@@ -32,48 +33,27 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> sort_all_movies_by_title_ascending
         {
-            get
-            {
-                ((List<Movie>) movies).Sort(new Comparison<Movie>(Movie.SortByTitle));
-
-                foreach (var movie in movies)
-                    yield return movie;
-            }
+            get { return movies.sort_using(Movie.SortByTitle()); }
         }
 
         public IEnumerable<Movie> sort_all_movies_by_movie_studio_and_year_published()
         {
-            ((List<Movie>) movies).Sort(new Comparison<Movie>(Movie.SortByStudioAndYearPublished));
-
-            foreach (var movie in movies)
-                yield return movie;
+            return movies.sort_using(Movie.SortByStudioAndYearPublished());
         }
 
         public IEnumerable<Movie> sort_all_movies_by_date_published_descending()
         {
-            ((List<Movie>) movies).Sort(new Comparison<Movie>(Movie.SortByDate));
-
-            for (var i = movies.Count; i > 0; i--)
-                yield return movies[i - 1];
+            return movies.sort_using(new ReverseComparer<Movie>(new SortByDate()));
         }
 
         public IEnumerable<Movie> sort_all_movies_by_title_descending
         {
-            get
-            {
-                ((List<Movie>) movies).Sort(new Comparison<Movie>(Movie.SortByTitle));
-
-                for (var i = movies.Count; i > 0; i--)
-                    yield return movies[i - 1];
-            }
+            get { return movies.sort_using(new ReverseComparer<Movie>(Movie.SortByTitle())); }
         }
 
         public IEnumerable<Movie> sort_all_movies_by_date_published_ascending()
         {
-            ((List<Movie>) movies).Sort(new Comparison<Movie>(Movie.SortByDate));
-
-            foreach (var movie in movies)
-                yield return movie;
+            return movies.sort_using(Movie.SortByDate());
         }
     }
 }

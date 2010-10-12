@@ -12,9 +12,9 @@ namespace nothinbutdotnetprep.infrastructure.searching
         }
 
         public static Criteria<ItemToFilter> equal_to_any<ItemToFilter, PropertyType>(
-            this CriteriaFactory<ItemToFilter, PropertyType> extension_point, params PropertyType[] values)
+            this CriteriaFactory<ItemToFilter, PropertyType> criteria_factory, params PropertyType[] values)
         {
-            return extension_point.create_property_criteria_for(new IsEqualToAny<PropertyType>(values));
+            return criteria_factory.create_property_criteria_for(new IsEqualToAny<PropertyType>(values));
         }
 
         public static Criteria<ItemToFilter> between<ItemToFilter, PropertyType>(
