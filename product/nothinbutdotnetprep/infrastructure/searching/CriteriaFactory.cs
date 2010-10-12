@@ -25,9 +25,8 @@ namespace nothinbutdotnetprep.infrastructure.searching
 
         public Criteria<ItemToFilter> not_equal_to(PropertyType value)
         {
-            IList<PropertyType> items = new List<PropertyType>();
-            items.Add(value);
-            return new AnonymousCriteria<ItemToFilter>(x => !items.Contains(property_accessor(x)));
+            return equal_to(value).not();
         }
+
     }
 }
