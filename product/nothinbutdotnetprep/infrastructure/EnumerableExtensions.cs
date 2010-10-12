@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using nothinbutdotnetprep.infrastructure.searching;
+using nothinbutdotnetprep.infrastructure.sorting;
 
 namespace nothinbutdotnetprep.infrastructure
 {
@@ -33,23 +34,34 @@ namespace nothinbutdotnetprep.infrastructure
 
         public static IEnumerable<ItemToSort> order_by_descending<ItemToSort, PropertyType>(
             this IEnumerable<ItemToSort> items, Func<ItemToSort, PropertyType> accessor)
-            where PropertyType : IComparer<PropertyType>
+            where PropertyType : IComparable<PropertyType>
         {
-            throw new NotImplementedException();
+            return items.sort_using(new ReverseComparer<ItemToSort>(new PropertyComparer<ItemToSort, PropertyType>(accessor,
+                                                                                           new ComparableComparer
+                                                                                               <PropertyType>())));
         }
 
         public static IEnumerable<ItemToSort> order_by<ItemToSort, PropertyType>(this IEnumerable<ItemToSort> items,
                                                                                  Func<ItemToSort, PropertyType> accessor)
-            where PropertyType : IComparer<PropertyType>
+            where PropertyType : IComparable<PropertyType>
         {
-            throw new NotImplementedException();
+            return items.sort_using(new PropertyComparer<ItemToSort, PropertyType>(accessor, new ComparableComparer<PropertyType>()));
         }
 
         public static IEnumerable<ItemToSort> order_by<ItemToSort, PropertyType>(this IEnumerable<ItemToSort> items,
                                                                                  Func<ItemToSort, PropertyType> accessor,
                                                                                  params PropertyType[] values)
         {
-            throw new NotImplementedException();
+            return items.sort_using(new PropertyComparer<ItemToSort, PropertyType>(accessor, new RakingComparer<PropertyType>(values)));
+        }
+
+        public static IEnumerable<ItemToSort> then_by<ItemToSort, PropertyType>(this IEnumerable<ItemToSort> items, 
+                                                                                Func<ItemToSort, PropertyType> accessor)
+        {
+//            
+//            var comparer = new ComparerBuilder<ItemToSort>(new PropertyComparer<ItemToSort, PropertyType>(accessor,
+//                                                                
+//            return items.sort_using(comparer);
         }
     }
 }
