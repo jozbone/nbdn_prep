@@ -2,6 +2,7 @@
 {
     public static class BasicFilteringExtensions
     {
+
         public static Criteria<ItemToFilter> equal_to<ItemToFilter, PropertyType>(
             this FilteringExtensionPoint<ItemToFilter, PropertyType> extension_point, PropertyType value)
         {
@@ -20,5 +21,10 @@
         {
             return equal_to(extension_point, value).not();
         }
+
+      
+        
     }
+
+  
 }

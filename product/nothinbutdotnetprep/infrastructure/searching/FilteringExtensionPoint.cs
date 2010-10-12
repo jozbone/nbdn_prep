@@ -10,5 +10,16 @@ namespace nothinbutdotnetprep.infrastructure.searching
         {
             this.accessor = property_accessor;
         }
+
+        //public static class Not
+        //{
+            public  FilteringExtensionPoint<ItemToFilter, PropertyType> toNegate;
+
+            public  FilteringExtensionPoint<ItemToFilter, PropertyType> not
+            {
+                 get { return toNegate; }
+                set { toNegate = value; }
+            }
+        //}
     }
 }
